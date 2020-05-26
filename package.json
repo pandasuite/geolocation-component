@@ -1,0 +1,20 @@
+{
+  "name": "geolocation-component",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "https://github.com/pandasuite/geolocation-component.git",
+  "author": "Benjamin Barbe <benjamin@pandasuite.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -f pandasuite-component.zip && zip -r -X 'pandasuite-component.zip' *",
+    "release": "yarn build && release-it --no-npm.publish"
+  },
+  "release-it": {
+    "github": {
+      "release": true,
+      "assets": [
+        "pandasuite-component.zip"
+      ]
+    }
+  }
+}

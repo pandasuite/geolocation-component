@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "main": "index.html",
+
+  "system": {
+    "name": "Geolocation",
+    "events": [
+      {
+        "id": "triggerMarker",
+        "name": "GPS coordinates",
+        "locale_name": {
+          "fr_FR": "Coordonnées GPS"
+        }
+      }
+    ],
+    "markers": [
+      {
+        "params": [
+          { "id": "enter", "name": "Geofence enter", "locale_name": {"fr_FR": "Entrée Geofence"}, "type": "Boolean" },
+          { "id": "exit", "name": "Geofence exit", "locale_name": {"fr_FR": "Sortie Geofence"}, "type": "Boolean" },
+          { "id": "radius", "name": "Radius", "locale_name": {"fr_FR": "Rayon"}, "type": "Float" }
+        ]
+      }
+    ]
+  },
+
+  "events": [
+    {
+      "id": "locationError",
+      "name": "Geolocation Error",
+      "locale_name": {
+        "fr_FR": "Erreur de géolocalisation"
+      }
+    }
+  ],
+
+  "properties": [
+    {
+      "id": "apiKey",
+      "name": "Google Maps API key",
+      "type": "String",
+      "activable": false,
+      "value": "AIzaSyBtzf0Qa1brPE6V75WQfHzsxHTb11puFzM"
+    },
+    {
+      "id": "detectionDistance",
+      "name": "Detection Distance (meters)",
+      "locale_name": {
+        "fr_FR": "Distance de détection (mètres)"
+      },
+      "type": "Float",
+      "value": 20
+    }
+  ]
+
+}
