@@ -16,5 +16,8 @@
         "pandasuite-component.zip"
       ]
     }
+  },
+  "devDependencies": {
+    "release-it": "^13.6.1"
   }
 }
