@@ -6,7 +6,7 @@
   "author": "Benjamin Barbe <benjamin@pandasuite.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -f pandasuite-component.zip && zip -r -X 'pandasuite-component.zip' *",
+    "build": "rm -f pandasuite-component.zip && zip -r -X 'pandasuite-component.zip' * -x /node_modules/* package.json yarn.lock",
     "release": "yarn build && release-it --no-npm.publish"
   },
   "release-it": {
