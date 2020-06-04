@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src='js/map.js'></script>
-    <script src="./panda-bridge-3.0.3.min.js"></script>
+    <script src="js/pandasuite-bridge-4.2.0.min.js"></script>
     <style>
       html, body {
         height: 100%;
@@ -116,6 +116,11 @@
           } else {
             initGeolocation();
           }
+        });
+
+        PandaBridge.onUpdate(function(pandaData) {
+          properties = pandaData.properties;
+          markers = pandaData.markers;
         });
 
         PandaBridge.getSnapshotData(function() {
