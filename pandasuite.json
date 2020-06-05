@@ -7,18 +7,18 @@
     "events": [
       {
         "id": "triggerMarker",
-        "name": "GPS coordinates",
+        "name": "GPS Detection",
         "locale_name": {
-          "fr_FR": "Coordonnées GPS"
+          "fr_FR": "Détection de la zone GPS"
         }
       }
     ],
     "markers": [
       {
         "params": [
-          { "id": "enter", "name": "Geofence enter", "locale_name": {"fr_FR": "Entrée Geofence"}, "type": "Boolean" },
-          { "id": "exit", "name": "Geofence exit", "locale_name": {"fr_FR": "Sortie Geofence"}, "type": "Boolean" },
-          { "id": "radius", "name": "Radius", "locale_name": {"fr_FR": "Rayon"}, "type": "Float" }
+          { "id": "radius", "name": "Detection radius (meters)", "locale_name": {"fr_FR": "Distance de détection (mètres)"}, "type": "Float" },
+          { "id": "enter", "name": "Detects when user enters zone", "locale_name": {"fr_FR": "Détection entrée de zone"}, "type": "Boolean" },
+          { "id": "exit", "name": "Detects when user exists zone", "locale_name": {"fr_FR": "Détection sortie de zone"}, "type": "Boolean" }
         ]
       }
     ]
@@ -40,11 +40,12 @@
       "name": "Google Maps API key",
       "type": "String",
       "activable": false,
-      "value": "AIzaSyBtzf0Qa1brPE6V75WQfHzsxHTb11puFzM"
+      "value": "AIzaSyBtzf0Qa1brPE6V75WQfHzsxHTb11puFzM",
+      "hidden": true
     },
     {
       "id": "detectionDistance",
-      "name": "Detection Distance (meters)",
+      "name": "Default Detection Radius (meters)",
       "locale_name": {
         "fr_FR": "Distance de détection (mètres)"
       },
