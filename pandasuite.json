@@ -18,7 +18,7 @@
         "params": [
           { "id": "radius", "name": "Detection radius (meters)", "locale_name": {"fr_FR": "Distance de détection (mètres)"}, "type": "Float" },
           { "id": "enter", "name": "Detects when user enters zone", "locale_name": {"fr_FR": "Détection entrée de zone"}, "type": "Boolean" },
-          { "id": "exit", "name": "Detects when user exists zone", "locale_name": {"fr_FR": "Détection sortie de zone"}, "type": "Boolean" }
+          { "id": "exit", "name": "Detects when user exits zone", "locale_name": {"fr_FR": "Détection sortie de zone"}, "type": "Boolean" }
         ]
       }
     ]
