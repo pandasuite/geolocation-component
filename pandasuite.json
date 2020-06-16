@@ -15,13 +15,31 @@
     ],
     "markers": [
       {
+        "hideSystemId": true,
         "params": [
           { "id": "radius", "name": "Detection radius (meters)", "locale_name": {"fr_FR": "Distance de détection (mètres)"}, "type": "Float" },
           { "id": "enter", "name": "Detects when user enters zone", "locale_name": {"fr_FR": "Détection entrée de zone"}, "type": "Boolean" },
           { "id": "exit", "name": "Detects when user exits zone", "locale_name": {"fr_FR": "Détection sortie de zone"}, "type": "Boolean" }
         ]
       }
-    ]
+    ],
+    "defaults": {
+      "markers": {
+        "description": {
+          "value": "[%s, %s]",
+          "args": [
+            {
+              "key": "lat",
+              "format": "0.0[0000]"
+            },
+            {
+              "key": "lng",
+              "format": "0.0[0000]"
+            }
+          ]
+        }
+      }
+    }
   },
 
   "events": [
