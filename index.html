@@ -202,7 +202,11 @@
               m.oldPosInRadius = markerIsInRadius;
             });
           }, function(e) {
-            initGeolocation();
+            if (e.code == 3) {
+              initGeolocation();
+            } else {
+              handleLocationError(true);
+            }
           }, { enableHighAccuracy: true, maximumAge: 1000, timeout: 10000 });
         } else {
           handleLocationError(false);
