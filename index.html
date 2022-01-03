@@ -201,7 +201,7 @@
               }
               m.oldPosInRadius = markerIsInRadius;
             });
-            PandaBridge.send(PandaBridge.UPDATED, { pos });
+            PandaBridge.send(PandaBridge.UPDATED, { queryable: pos });
           }, function(e) {
             if (e.code == 3) {
               initGeolocation();
