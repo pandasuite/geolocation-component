@@ -70,6 +70,23 @@
       "type": "Float",
       "value": 20
     }
-  ]
+  ],
+
+  "queryable": {
+    "lat": 48.853610,
+    "lng": 2.393230,
+    "__desc_lat": {
+      "name": "Latitude",
+      "locale_name": {
+        "fr_FR": "Latitude"
+      }
+    },
+    "__desc_lng": {
+      "name": "Longitude",
+      "locale_name": {
+        "fr_FR": "Longitude"
+      }
+    }
+  }
 
 }
