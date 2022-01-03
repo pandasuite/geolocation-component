@@ -1,6 +1,6 @@
 {
   "name": "geolocation-component",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "homepage": "./",
   "repository": "https://github.com/pandasuite/geolocation-component.git",
   "author": "Benjamin Barbe <benjamin@pandasuite.com>",
