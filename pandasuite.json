@@ -73,18 +73,17 @@
   ],
 
   "queryable": {
-    "lat": 48.853610,
-    "lng": 2.393230,
-    "__desc_lat": {
-      "name": "Latitude",
-      "locale_name": {
-        "fr_FR": "Latitude"
+    "coord": {
+      "type": "Coord",
+      "value": {
+        "lat": 48.853610,
+        "lng": 2.393230
       }
     },
-    "__desc_lng": {
-      "name": "Longitude",
+    "__desc_coord": {
+      "name": "Coordinates",
       "locale_name": {
-        "fr_FR": "Longitude"
+        "fr_FR": "Coordonnées"
       }
     }
   }

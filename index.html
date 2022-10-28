@@ -189,7 +189,14 @@
           navigator.geolocation.watchPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
-              lng: position.coords.longitude
+              lng: position.coords.longitude,
+              coord: {
+                type: 'Coord',
+                value: {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                }
+              }
             };
 
             markers.forEach(function(m) {
