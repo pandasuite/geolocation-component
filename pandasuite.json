@@ -76,8 +76,8 @@
     "coord": {
       "type": "Coord",
       "value": {
-        "lat": 48.853610,
-        "lng": 2.393230
+        "lat": 0,
+        "lng": 0
       }
     },
     "__desc_coord": {
