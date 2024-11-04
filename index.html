@@ -2,12 +2,12 @@
 <html>
   <head>
     <title>Geolocation</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <script src='js/map.js'></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
     <script src="js/pandasuite-bridge-4.2.1.min.js"></script>
     <style>
-      html, body {
+      html,
+      body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -88,7 +88,13 @@
     </style>
   </head>
   <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="display: none;">
+    <input
+      id="pac-input"
+      class="controls"
+      type="text"
+      placeholder="Search Box"
+      style="display: none"
+    />
     <div id="map"></div>
     <script>
       var map = null;
@@ -99,38 +105,46 @@
       var properties = null;
       var markers = null;
 
-      PandaBridge.init(function() {
-
-        PandaBridge.onLoad(function(pandaData) {
+      PandaBridge.init(function () {
+        PandaBridge.onLoad(function (pandaData) {
           properties = pandaData.properties;
           markers = pandaData.markers;
 
           if (PandaBridge.isStudio) {
             var script = document.createElement("script");
-            script.setAttribute("src", "https://maps.googleapis.com/maps/api/js?callback=initMap" +
-              (properties.apiKey ? "&libraries=places&key=" + properties.apiKey : ""));
+            script.setAttribute(
+              "src",
+              "https://maps.googleapis.com/maps/api/js?callback=initMap" +
+                (properties.apiKey
+                  ? "&libraries=places&key=" + properties.apiKey
+                  : ""),
+            );
             document.getElementsByTagName("head")[0].appendChild(script);
             if (properties.apiKey) {
-              document.getElementById('pac-input').style.display = 'inline';
+              document.getElementById("pac-input").style.display = "inline";
             }
           } else {
             initGeolocation();
           }
         });
 
-        PandaBridge.onUpdate(function(pandaData) {
+        PandaBridge.onUpdate(function (pandaData) {
           properties = pandaData.properties;
           markers = pandaData.markers;
         });
 
-        PandaBridge.getSnapshotData(function() {
+        PandaBridge.getSnapshotData(function () {
           if (marker != null) {
-            return { lat: marker.getPosition().lat(), lng: marker.getPosition().lng(), radius: circle.getRadius() }
+            return {
+              lat: marker.getPosition().lat(),
+              lng: marker.getPosition().lng(),
+              radius: circle.getRadius(),
+            };
           }
           return null;
         });
 
-        PandaBridge.setSnapshotData(function(pandaData) {
+        PandaBridge.setSnapshotData(function (pandaData) {
           pandaData.data.lat = parseFloat(pandaData.data.lat);
           pandaData.data.lng = parseFloat(pandaData.data.lng);
           pandaData.data.radius = parseFloat(pandaData.data.radius);
@@ -140,13 +154,12 @@
             initialLocation = pandaData.data;
           }
         });
-
       });
 
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: 48.864051319607476, lng: 2.3559504747390747 },
-          zoom: 18
+          zoom: 18,
         });
 
         if (initialLocation) {
@@ -154,20 +167,20 @@
         }
         PandaBridge.send(PandaBridge.INITIALIZED);
 
-        map.addListener('click', function(event) {
+        map.addListener("click", function (event) {
           addMarker(event.latLng);
         });
 
         if (PandaBridge.isStudio) {
-          var input = document.getElementById('pac-input');
+          var input = document.getElementById("pac-input");
           var searchBox = new google.maps.places.SearchBox(input);
           map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-          map.addListener('bounds_changed', function() {
+          map.addListener("bounds_changed", function () {
             searchBox.setBounds(map.getBounds());
           });
 
-          searchBox.addListener('places_changed', function() {
+          searchBox.addListener("places_changed", function () {
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
@@ -185,37 +198,44 @@
 
       function initGeolocation() {
         if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(
+            function (position) {
+              var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+                coord: {
+                  type: "Coord",
+                  value: {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                  },
+                },
+              };
 
-          navigator.geolocation.watchPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              coord: {
-                type: 'Coord',
-                value: {
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude,
-                }
-              }
-            };
-
-            markers.forEach(function(m) {
-              var markerIsInRadius = getHaversineDistance(pos, m) < (m.radius || properties.detectionDistance);
-              if ((markerIsInRadius && !m.enter && !m.exit) ||
+              markers.forEach(function (m) {
+                var markerIsInRadius =
+                  getHaversineDistance(pos, m) <
+                  (m.radius || properties.detectionDistance);
+                if (
+                  (markerIsInRadius && !m.enter && !m.exit) ||
                   (markerIsInRadius && m.enter && !m.oldPosInRadius) ||
-                  (!markerIsInRadius && m.exit && m.oldPosInRadius)) {
-                PandaBridge.send(PandaBridge.TRIGGER_MARKER, m.id);
+                  (!markerIsInRadius && m.exit && m.oldPosInRadius)
+                ) {
+                  PandaBridge.send(PandaBridge.TRIGGER_MARKER, m.id);
+                }
+                m.oldPosInRadius = markerIsInRadius;
+              });
+              PandaBridge.send(PandaBridge.UPDATED, { queryable: pos });
+            },
+            function (e) {
+              if (e.code == 3) {
+                initGeolocation();
+              } else {
+                handleLocationError(true);
               }
-              m.oldPosInRadius = markerIsInRadius;
-            });
-            PandaBridge.send(PandaBridge.UPDATED, { queryable: pos });
-          }, function(e) {
-            if (e.code == 3) {
-              initGeolocation();
-            } else {
-              handleLocationError(true);
-            }
-          }, { enableHighAccuracy: true, maximumAge: 1000, timeout: 10000 });
+            },
+            { enableHighAccuracy: true, maximumAge: 1000, timeout: 10000 },
+          );
         } else {
           handleLocationError(false);
         }
@@ -229,43 +249,46 @@
 
         marker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
         });
         map.setCenter(location);
 
         circle = new google.maps.Circle({
-          strokeColor: '#FF0000',
+          strokeColor: "#FF0000",
           strokeOpacity: 0.8,
           strokeWeight: 2,
-          fillColor: '#FF0000',
+          fillColor: "#FF0000",
           fillOpacity: 0.35,
           map: map,
           center: location,
-          radius: location.radius || properties.detectionDistance
+          radius: location.radius || properties.detectionDistance,
         });
       }
 
       function handleLocationError(browserHasGeolocation) {
-        PandaBridge.send('locationError');
+        PandaBridge.send("locationError");
       }
 
       function getHaversineDistance(p1, p2) {
         var R = 6371;
-        var dLat  = toRadian(parseFloat(p2.lat) - parseFloat(p1.lat));
+        var dLat = toRadian(parseFloat(p2.lat) - parseFloat(p1.lat));
         var dLong = toRadian(parseFloat(p2.lng) - parseFloat(p1.lng));
 
-        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(toRadian(parseFloat(p1.lat))) * Math.cos(toRadian(parseFloat(p2.lat))) * Math.sin(dLong/2) * Math.sin(dLong/2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRadian(parseFloat(p1.lat))) *
+            Math.cos(toRadian(parseFloat(p2.lat))) *
+            Math.sin(dLong / 2) *
+            Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
 
         return d * 1000;
       }
 
       function toRadian(x) {
-        return x * Math.PI / 180
+        return (x * Math.PI) / 180;
       }
-
     </script>
   </body>
 </html>
