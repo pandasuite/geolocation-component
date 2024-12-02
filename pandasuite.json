@@ -16,10 +16,43 @@
     "markers": [
       {
         "hideSystemId": true,
+        "enableSource": true,
         "params": [
-          { "id": "radius", "name": "Detection radius (meters)", "locale_name": {"fr_FR": "Distance de détection (mètres)"}, "type": "Float" },
-          { "id": "enter", "name": "Detects when user enters zone", "locale_name": {"fr_FR": "Détection entrée de zone"}, "type": "Boolean" },
-          { "id": "exit", "name": "Detects when user exits zone", "locale_name": {"fr_FR": "Détection sortie de zone"}, "type": "Boolean" }
+          {
+            "id": "center",
+            "name": "Center",
+            "locale_name": {
+              "fr_FR": "Centre"
+            },
+            "type": "Coord",
+            "value": {
+              "lat": 48.861,
+              "lng": 2.344
+            },
+            "bindable": true
+          },
+          {
+            "id": "radius",
+            "name": "Radius (meters)",
+            "locale_name": { "fr_FR": "Rayon (mètres)" },
+            "type": "Float",
+            "bindable": true
+          },
+          {
+            "id": "enter",
+            "name": "Zone entry trigger",
+            "locale_name": { "fr_FR": "Détection entrée de zone" },
+            "type": "Boolean",
+            "separator": true,
+            "bindable": true
+          },
+          {
+            "id": "exit",
+            "name": "Zone exit trigger",
+            "locale_name": { "fr_FR": "Détection sortie de zone" },
+            "type": "Boolean",
+            "bindable": true
+          }
         ]
       }
     ],
@@ -29,11 +62,11 @@
           "value": "[%s, %s]",
           "args": [
             {
-              "key": "lat",
+              "key": "center.lat",
               "format": "0.0[0000]"
             },
             {
-              "key": "lng",
+              "key": "center.lng",
               "format": "0.0[0000]"
             }
           ]
@@ -87,5 +120,4 @@
       }
     }
   }
-
 }
