@@ -1,7 +1,14 @@
 {
+  "meta": {
+    "stype": "geolocation",
+    "componentURL": "https://github.com/pandasuite/geolocation-component/",
+    "description": "Tracks the user's GPS position in real time and triggers actions when entering or exiting geofencing zones. Exposes coordinates as queryable data for maps and location-based experiences.",
+    "locale_description": {
+      "fr_FR": "Suit la position GPS de l'utilisateur en temps réel et déclenche des actions à l'entrée ou la sortie de zones de géorepérage. Expose les coordonnées comme données interrogeables pour les cartes et expériences basées sur la localisation."
+    }
+  },
   "version": "2.0.0",
   "main": "",
-
   "system": {
     "name": "Geolocation",
     "events": [
@@ -10,6 +17,10 @@
         "name": "GPS Detection",
         "locale_name": {
           "fr_FR": "Détection de la zone GPS"
+        },
+        "description": "Fires when the user enters the detection zone of a geofencing marker.",
+        "locale_description": {
+          "fr_FR": "Se déclenche quand l'utilisateur entre dans la zone de détection d'un marqueur de géorepérage."
         }
       }
     ],
@@ -29,31 +40,57 @@
               "lat": 48.861,
               "lng": 2.344
             },
-            "bindable": true
+            "bindable": true,
+            "description": "GPS coordinates of the geofencing zone center.",
+            "locale_description": {
+              "fr_FR": "Coordonnées GPS du centre de la zone de géorepérage."
+            }
           },
           {
             "id": "radius",
             "name": "Radius (meters)",
-            "locale_name": { "fr_FR": "Rayon (mètres)" },
+            "locale_name": {
+              "fr_FR": "Rayon (mètres)"
+            },
             "type": "Float",
-            "bindable": true
+            "bindable": true,
+            "description": "Detection radius in meters around the zone center.",
+            "locale_description": {
+              "fr_FR": "Rayon de détection en mètres autour du centre de la zone."
+            }
           },
           {
             "id": "enter",
             "name": "Zone entry trigger",
-            "locale_name": { "fr_FR": "Détection entrée de zone" },
+            "locale_name": {
+              "fr_FR": "Détection entrée de zone"
+            },
             "type": "Boolean",
             "separator": true,
-            "bindable": true
+            "bindable": true,
+            "description": "Trigger when the user enters this geofencing zone.",
+            "locale_description": {
+              "fr_FR": "Se déclencher quand l'utilisateur entre dans cette zone de géorepérage."
+            }
           },
           {
             "id": "exit",
             "name": "Zone exit trigger",
-            "locale_name": { "fr_FR": "Détection sortie de zone" },
+            "locale_name": {
+              "fr_FR": "Détection sortie de zone"
+            },
             "type": "Boolean",
-            "bindable": true
+            "bindable": true,
+            "description": "Trigger when the user exits this geofencing zone.",
+            "locale_description": {
+              "fr_FR": "Se déclencher quand l'utilisateur quitte cette zone de géorepérage."
+            }
           }
-        ]
+        ],
+        "description": "Geofencing zones defined by center coordinates and detection radius.",
+        "locale_description": {
+          "fr_FR": "Zones de géorepérage définies par des coordonnées centrales et un rayon de détection."
+        }
       }
     ],
     "defaults": {
@@ -74,17 +111,19 @@
       }
     }
   },
-
   "events": [
     {
       "id": "locationError",
       "name": "Geolocation Error",
       "locale_name": {
         "fr_FR": "Erreur de géolocalisation"
+      },
+      "description": "Fires when GPS location cannot be determined (permission denied or unavailable).",
+      "locale_description": {
+        "fr_FR": "Se déclenche quand la position GPS ne peut pas être déterminée (permission refusée ou indisponible)."
       }
     }
   ],
-
   "properties": [
     {
       "id": "apiKey",
@@ -92,7 +131,11 @@
       "type": "String",
       "activable": false,
       "value": "AIzaSyBtzf0Qa1brPE6V75WQfHzsxHTb11puFzM",
-      "hidden": true
+      "hidden": true,
+      "description": "Google Maps API key for reverse geocoding (optional).",
+      "locale_description": {
+        "fr_FR": "Clé API Google Maps pour le géocodage inverse (optionnel)."
+      }
     },
     {
       "id": "detectionDistance",
@@ -101,10 +144,13 @@
         "fr_FR": "Distance de détection (mètres)"
       },
       "type": "Float",
-      "value": 20
+      "value": 20,
+      "description": "Detection radius in meters for geofencing markers.",
+      "locale_description": {
+        "fr_FR": "Rayon de détection en mètres pour les marqueurs de géorepérage."
+      }
     }
   ],
-
   "queryable": {
     "coord": {
       "type": "Coord",
@@ -117,6 +163,10 @@
       "name": "Coordinates",
       "locale_name": {
         "fr_FR": "Coordonnées"
+      },
+      "description": "Current GPS coordinates of the user.",
+      "locale_description": {
+        "fr_FR": "Coordonnées GPS actuelles de l'utilisateur."
       }
     }
   }
