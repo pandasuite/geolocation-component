@@ -7,14 +7,17 @@
   "license": "MIT",
   "scripts": {
     "start": "PORT=9000 serve",
-    "build": "rm -f pandasuite-component.zip && zip -r -X 'pandasuite-component.zip' * -x /node_modules/* package.json yarn.lock *.DS_Store* crossdomain.xml",
-    "release": "yarn build && release-it --no-npm.publish"
+    "build": "rm -f pandasuite-component.zip geolocation-component-v*.zip && zip -r -X \"geolocation-component-v$npm_package_version.zip\" * -x /node_modules/* package.json yarn.lock *.DS_Store* crossdomain.xml \"*.zip\"",
+    "release": "release-it --no-npm.publish"
   },
   "release-it": {
+    "hooks": {
+      "after:bump": "yarn build"
+    },
     "github": {
       "release": true,
       "assets": [
-        "pandasuite-component.zip"
+        "geolocation-component-v*.zip"
       ]
     }
   },
